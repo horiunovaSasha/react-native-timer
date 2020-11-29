@@ -1,15 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Picker } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { styles } from './stylesheet';
 import Menu from './components/menu';
 import Buttons from './components/button';
 import Timer from './components/timer';
-import Label from './components/label';
-import Info from './components/info';
-import Picture from './components/picture';
 import vibrate from './vibrate';
 
 function leftPadding(n) {
+  console.log(n);
   if (parseInt(n) < 10) {
     return "0" + n.toString();
   } else {
@@ -23,7 +21,7 @@ function getTime(val) {
 
 class App extends React.Component {
   constructor(props) {
-    super(props),
+    super(props), 
     this.state = {
       currentTime: "25:00",
       workTime: "25:00",
@@ -79,19 +77,17 @@ class App extends React.Component {
         timer: null,
         playing: false
       });
-      console.log(this.state.paused);
-    } else if (this.state.paused === true && this.state.playing === false) {
-      this.playButton();
-    }       
+    } 
   }
 
   resetButton () {
+
     this.pauseButton();
     this.setState({
       currentTime: this.state.workTime,
       playing: false,
       paused: false,
-      working: true,
+      working: false,
     })
   }
 
@@ -121,11 +117,13 @@ class App extends React.Component {
 
   toggleStatus() {
     if (this.state.working) {
+      console.log("stopping");
       this.setState({
         working: false,
         currentTime: this.state.breakTime,
       })
     } else {
+      console.log("starting");
       this.setState({
         working: true,
         currentTime: this.state.workTime,
@@ -137,7 +135,6 @@ class App extends React.Component {
     return (
       <View style={styles.container}>
         <Timer currentTime={this.state.currentTime}/>
-        <Label working={this.state.working} paused={this.state.paused} playing={this.state.playing}/>
         <View style={{flexDirection: 'row'}}>
           <Buttons 
             title="Play" 
@@ -166,8 +163,6 @@ class App extends React.Component {
             onValueChange={this.setBreakTimer}
           />
         </View> 
-        <Info />
-        <Picture />
       </View>
     );
   }

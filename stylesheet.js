@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 6,
     paddingRight: 3,
     position: 'absolute',
-    top: 100
+    top: 300
   },
   label: {
     fontSize: 40,
